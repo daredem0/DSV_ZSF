@@ -1,0 +1,41 @@
+\section{Analog-Digital-Wandler (ADW)}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.9, every node/.style={scale=0.9}]
+    			\draw[dspconn] (0,0) -- node[above]{$x_a(t)$} (1.5,0);
+    			\draw[] (0,0) -- node[below]{\parbox{4cm}{\centering \vspace{+0.5cm} Analog: \\ zeitkontinuierlich \\ wertkontinuerlich}} (1.5,0);
+    			\draw (1.5,0.5) rectangle (3.7,-0.5) node[pos=0.5]{Abtastung};
+    			\draw[dspconn] (3.7,0) -- node[above]{$x(n)$} (5.2,0);
+    			\draw[] (3.7,0) -- node[below]{\parbox{4cm}{\centering  \vspace{+1cm}  zeitdiskret \\ wertkontinuerlich}} (5.2,0);
+    			\draw (5.2,0.5) rectangle (8,-0.5) node[pos=0.5]{Quantisierung};
+    			\draw[dspconn] (8,0) -- node[above]{$x_q(n)$} (9.5,0);
+    			\draw[] (8,0) -- node[below]{\parbox{4cm}{\centering \vspace{+0.5cm} Digital: \\ zeitdiskret \\ wertdiskret}} (9.5,0);
+ 	  \end{tikzpicture}
+	\end{center}
+	
+	\subsection{Wichtige Kenndaten eines ADW}
+	\begin{description}
+		\item[$\ast$) ]Abtastfrequenz: Hz $\sim$ GHz
+		\item[$\ast$) ]Wortbreite: $8 \sim 16$ Bits
+	\end{description}
+	
+	\subsection{Quantisierung}
+		Approximation von $x(n) \in \R$ durch $b$ Bits:
+		\begin{equation}
+			x_q(n) = Q[x(n)] = x(n) + e(n)
+		\end{equation}
+		mit: \\ $\;$\\
+		\begin{tabular}{l c l}
+		$b$& : & Wortbreite, $2^b$ mögliche Werte für $x_q(n)$ \\
+		$Q$& : & Quantisierungsoperator\\
+		$e(n)$& : & Quantisierungsfehler,- rauschen (zufällig) $\sim \frac{1}{2^b}$ \\
+		\end{tabular} \\ $\;$ \\
+		wobei die Stufenbreite die Amplitude des Quantisierungsfehlers bestimmt.
+		\subsection{Signal-Rausch-Abstand (SNR)}
+		\begin{align}
+			SNR[dB] &= 10 \cdot \log_{10} \frac{\text{Signalleistung}}{\text{Rauschleistung}} \nonumber\\
+				&= 10 \cdot \log_{10} \frac{\overbar{x^2(t)}}{\overbar{e^2(t)}} = \dots = \text{const} + 10 \cdot log_{10}\left( 2^b \right)^2 \nonumber \\
+				&\approx \text{const} + 6 \cdot b
+		\end{align}
+		wobei $x(t)$ die Leistung des Nutzsignals ist. Damit folgt direkt ein Anstieg des $SNR$ um $6dB$ pro zusätzlichem Bit.
+		
+		\subsection{Digital-Analog-Wandler (DAC)}

@@ -1,0 +1,66 @@
+\section{Was ist Signalverarbeitung}
+	Signalverarbeitung ist die Extraktion eines oder mehrerer Ausgangssignale oder Informationen aus einem oder mehreren Eingangssignalen. Das kann zum Beispiel Rauschunterdrückung sein (Signal $\rightarrow$ Signal) oder die Extraktion der Position eines Sprechers (Signal $\rightarrow$ Information).
+	
+	\subsection{Methoden der Signalverarbeitung}
+	Methoden dieser Vorlesung:
+	\begin{itemize}
+		\item Filterung
+		\item Korrelation
+		\item Spektralanalyse
+	\end{itemize}
+	Methoden weiterer Vorlesungen:
+	\begin{itemize}
+		\item Parameterschätzung
+		\item Optimalfilter und adaptive Filter
+		\item Detektion und Mustererkernnung 
+		\item $\dots$
+	\end{itemize}
+	
+	\subsection{Digitale Signalverarbeitung}
+	\begin{center}
+		\begin{tikzpicture}	
+			% Place nodes using a matrix
+			\matrix[row sep=2.5mm, column sep=20mm]
+			{
+				%--------------------------------------------------------------------
+				\node[dspnodeopen,dsp/label=above] (m00) {$x_a(t)$};    &
+				\node[dspsquare]                   (m01) {$\;$ ADW $\;$}; &
+				\node[dspsquare]                   (m02) {$\;$ $\;$DSV$\;$ $\;$}; &
+				\node[dspsquare]                   (m03) {$\;$ DAW $\;$}; &
+				\node[dspnodeopen,dsp/label=above] (m04) {$y_a(t)$};    \\
+				%--------------------------------------------------------------------
+			};
+		
+			% Draw connections
+			
+			\begin{scope}[start chain]
+				\chainin (m00);
+				\path (m00) edge node [below] {\parbox{1.8cm}{Analoger \\ Eingang}} (m01) ;
+				\chainin (m01) [join=by dspconn];
+				\path (m01) edge node [above] {$x_q (n)$} (m02) ;
+				\path (m01) edge node [below] {\parbox{1.8cm}{Digitaler \\ Eingang}} (m02) ;
+				\chainin (m02) [join=by dspconn];
+				\path (m02) edge node [above] {$y_q (n)$} (m03) ;
+				\path (m02) edge node [below] {\parbox{1.8cm}{Digitaler \\ Ausgang}} (m03) ;
+				\chainin (m03) [join=by dspconn];
+				\path (m03) edge node [below] {\parbox{1.8cm}{Analoger \\ Ausgang}} (m04) ;
+				\chainin (m04) [join=by dspconn];
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+	
+	\subsection{Vor- und Nachteile}
+	\begin{description}
+		\item[+] Beliebig hohe Genauigkeit
+		\item[+] Einfache Speicherung und Transport von Daten
+		\item[+] Flexibel (ein Prozessor für viele Aufgaben)
+		\item[+] Beliebig komplexe Signalverarbeitung möglich
+		\item[+] Billig für Massenprodukte
+		\item[-] Ungeeignet für extrem hohe Bandbreiten
+	\end{description}
+	
+	\subsection{Unschärferelation der digitalen Signalverarbeitung}
+	\begin{equation}
+		\text{Abtastfrequenz } \times\text{ Komplexität der Signalverarbeitung pro Abtastwert} \leq \text{verfügbare Rechenleistung}
+	\end{equation}
+	Oder in Worten ausgedrückt, wie viele Abtastwerte können von der Hardware verarbeitet werden.

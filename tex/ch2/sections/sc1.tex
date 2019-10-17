@@ -1,0 +1,35 @@
+\section{Zweiseitige Z-Transformation und Konvergenzbereich}
+	Gegeben: Signal oder Impulsantwort
+	\begin{equation}
+		x(n) \in \R \text{ od. } \C \qquad, n \in \Z
+	\end{equation}
+	\begin{align}
+	X(z) &= Z\left( x(n) \right) = \sum\limits_{n = - \infty}^\infty	 x(n) z^{-n} \qquad, z = r \cdot e^{j\omega} \quad \in \C \\
+	&= \dots + x(-1)z + x(0) + x(1)z^{-1} + \dots \nonumber
+	\end{align}
+	\subsection{Z-Ebene}
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+				axis lines=middle,
+				axis line style={Stealth-Stealth,very thick},
+				xmin=-3,xmax=3,ymin=-3,ymax=3,
+				xtick distance=10,
+				ytick distance=10,
+				xticklabels={,,},
+				yticklabels={,,},
+				xlabel=$Re(z)$,
+				ylabel=$Im(z)$,
+				title={},
+			    grid=major,
+				grid style={thin,densely dotted,black!20}]
+				\coordinate (A) at (axis cs:0,0);
+				\coordinate (B) at (axis cs:2,2);
+				\draw[thick,-Stealth](A)--(B) node[right]{$z$};
+			\end{axis}
+ 	  	\end{tikzpicture}
+	\end{center}
+	\subsection{Notation}
+	\begin{equation}
+		x(n) \overset{Z}{\rightarrow} X(z)
+	\end{equation}
